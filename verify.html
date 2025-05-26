@@ -4,13 +4,6 @@
   <meta charset="UTF-8" />
   <title>Email Verification</title>
   <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-    }
-  </style>
 </head>
 <body>
   <h1>Email Verification</h1>
@@ -19,8 +12,8 @@
   <script>
     const client = new Appwrite.Client();
     client
-      .setEndpoint('http://localhost/v1') // Your Appwrite endpoint
-      .setProject('6834868f003508b024c9');               // Your Appwrite project ID
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject('6834868f003508b024c9');
 
     const account = new Appwrite.Account(client);
 
