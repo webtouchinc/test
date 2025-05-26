@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Verification</title>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Email Verification</h1>
+  <p id="status">Verifying your email, please wait...</p>
+
+  <script>
+    const client = new Appwrite.Client();
+    client
+      .setEndpoint('http://localhost/v1') // Your Appwrite endpoint
+      .setProject('6834868f003508b024c9');               // Your Appwrite project ID
+
+    const account = new Appwrite.Account(client);
+
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('userId');
+    const secret = params.get('secret');
+
+    if (userId && secret) {
+      account.updateVerification(userId, secret)
+        .then(() => {
+          document.getElementById('status').innerText = 'Email verified successfully! You can now log in.';
+        })
+        .catch((error) => {
+          document.getElementById('status').innerText = `Verification failed: ${error.message}`;
+        });
+    } else {
+      document.getElementById('status').innerText = 'Invalid verification link.';
+    }
+  </script>
+</body>
+</html>
